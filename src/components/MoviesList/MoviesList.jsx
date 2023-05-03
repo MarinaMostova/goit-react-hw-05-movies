@@ -33,7 +33,7 @@ const MoviesList = ({ movies, location }) => {
 };
 
 MoviesList.propTypes = {
-  location: PropTypes.string,
+  location: PropTypes.object,
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,

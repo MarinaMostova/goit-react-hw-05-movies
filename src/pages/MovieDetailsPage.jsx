@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/movie-api';
 import MovieDetails from 'components/MovieDetails';
@@ -10,7 +10,7 @@ const MovieDetailsPage = () => {
   const [error, setError] = useState('');
   const location = useLocation();
 
-  const backLinkHref = location.state?.from ?? '/';
+  const backLinkHref = useRef(location.state?.from ?? '/');
 
   const getMovie = async id => {
     try {
@@ -27,7 +27,7 @@ const MovieDetailsPage = () => {
 
   return (
     <>
-      <ButtonBack location={backLinkHref} />
+      <ButtonBack location={backLinkHref.current} />
       <MovieDetails movie={movie} />
       {error && <p>Oops! Something went wrong! Please try again later</p>}
     </>
