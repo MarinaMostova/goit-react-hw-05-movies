@@ -13,7 +13,7 @@ const MovieDetailsPage = () => {
 
   const getMovie = async id => {
     try {
-      const data = await getMovieDetails(movieId);
+      const data = await getMovieDetails(id);
       setMovie(data);
     } catch (error) {
       setError(error);
