@@ -11,10 +11,9 @@ const Movies = () => {
   const [isLoading, setIsloading] = useState(false);
   const [error, setError] = useState('');
   const [movies, setMovies] = useState([]);
-  
+
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('query');
-
   const location = useLocation();
 
   useEffect(() => {

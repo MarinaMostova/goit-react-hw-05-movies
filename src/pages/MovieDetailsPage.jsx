@@ -9,7 +9,6 @@ const MovieDetailsPage = () => {
   const [movie, setMovie] = useState({});
   const [error, setError] = useState('');
   const location = useLocation();
-
   const backLinkHref = useRef(location.state?.from ?? '/');
 
   const getMovie = async id => {
