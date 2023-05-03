@@ -1,0 +1,32 @@
+.reviews__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 15px;
+}
+
+.reviews__item {
+  width: calc((100% - 30px * 1) / 2);
+  background-color: rgb(44, 125, 192, 0.2);
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.reviews__title {
+  font-size: 28px;
+}
+
+.reviews__text {
+  font-size: 20px;
+  text-align: start;
+  text-indent: 40px;
+}
+
+.reviews__mes {
+  font-size: 26px;
+  font-style: italic;
+}

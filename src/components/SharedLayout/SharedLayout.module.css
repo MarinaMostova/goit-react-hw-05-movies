@@ -1,0 +1,36 @@
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.header {
+  margin: 0 auto;
+  padding: 20px 25px;
+  background-color: #2c7dc0;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+}
+.header__nav {
+  display: flex;
+  gap: 10px;
+}
+
+.link {
+  font-size: 24px;
+  font-weight: 700;
+  color: rgb(166, 171, 175);
+  text-decoration: none;
+}
+
+.link:hover,
+.link:focus {
+   color: aliceblue;
+}
+
+.active {
+  composes: link;
+   color: aliceblue;
+  /* text-shadow: blue 2px 0 10px; */
+}
