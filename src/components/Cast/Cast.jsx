@@ -8,14 +8,19 @@ import Loader from 'components/Loader';
 const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState(null);
+  const [noCast, setNoCast] = useState(false);
   const [error, setError] = useState('');
+  const [isLoading, setIsloading] = useState(false);
 
   const getCast = async id => {
+    setIsloading(true);
     try {
       const data = await getMovieCast(id);
-      setCast(data);
+      data.length === 0 ? setNoCast(true) : setCast(data);
     } catch (error) {
       setError(error);
+    } finally {
+      setIsloading(false);
     }
   };
 
@@ -26,9 +31,9 @@ const Cast = () => {
   return (
     <>
       <ul className={css.cast__list}>
-        {cast?.map(({ id, character, name, profile_path }) => {
+        {cast?.map(({ cast_id, character, name, profile_path }) => {
           return (
-            <li key={id} className={css.cast__item}>
+            <li key={cast_id} className={css.cast__item}>
               <img
                 src={
                   profile_path
@@ -43,8 +48,13 @@ const Cast = () => {
           );
         })}
       </ul>
-      {!cast && <Loader />}
+      {isLoading && <Loader />}
       {error && <p>Oops! Something went wrong! Please try again later</p>}
+      {noCast && (
+        <p className={css.cast__mes}>
+          We have no information about the cast of this movie.
+        </p>
+      )}
     </>
   );
 };

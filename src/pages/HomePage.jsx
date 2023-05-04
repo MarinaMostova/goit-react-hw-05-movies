@@ -6,21 +6,28 @@ import MoviesList from 'components/MoviesList';
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState('');
+  const [isLoading, setIsloading] = useState(false);
 
   useEffect(() => {
+    getMovie();
+  }, []);
+
+  const getMovie = async () => {
+    setIsloading(true);
     try {
-      getMovieTrending().then(data => {
-        setMovies([...data]);
-      });
+      const result = await getMovieTrending();
+      setMovies([...result]);
     } catch (err) {
       setError(err);
+    } finally {
+      setIsloading(false);
     }
-  }, []);
+  };
 
   return (
     <>
       <h1>Trending today</h1>
-      {movies.length === 0 && <Loader />}
+      {isLoading && <Loader />}
       {movies.length > 0 && <MoviesList movies={movies} />}
       {error && <p>Oops! Something went wrong! Please try again later</p>}
     </>

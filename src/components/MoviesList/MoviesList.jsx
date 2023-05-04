@@ -1,12 +1,14 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import css from './MoviesList.module.css';
 import ImageNotFound from 'images/ImageNotFound.jpg';
 
-const MoviesList = ({ movies, location }) => {
+const MoviesList = ({ movies }) => {
+  const location = useLocation();
+
   return (
     <ul className={css.list}>
-      {movies.map(({ id, title, poster_path }) => {
+      {movies.map(({ id, original_title, title, poster_path }) => {
         return (
           <li className={css.item} key={id}>
             <NavLink
@@ -21,9 +23,9 @@ const MoviesList = ({ movies, location }) => {
                     ? `https://image.tmdb.org/t/p/w300/${poster_path}`
                     : ImageNotFound
                 }
-                alt={title}
+                alt={original_title || title}
               />
-              <p className={css.item__text}> {title}</p>
+              <p className={css.item__text}> {original_title || title}</p>
             </NavLink>
           </li>
         );
@@ -33,11 +35,11 @@ const MoviesList = ({ movies, location }) => {
 };
 
 MoviesList.propTypes = {
-  location: PropTypes.object,
   movies: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
+      original_title: PropTypes.string,
+      title: PropTypes.string,
       poster_path: PropTypes.string,
     }).isRequired
   ),

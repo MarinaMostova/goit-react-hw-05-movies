@@ -6,6 +6,7 @@ import ImageNotFound from 'images/ImageNotFound.jpg';
 const MovieDetails = ({ movie }) => {
   const {
     original_title,
+    title,
     release_date,
     vote_average,
     overview,
@@ -23,12 +24,12 @@ const MovieDetails = ({ movie }) => {
               ? `https://image.tmdb.org/t/p/w300/${poster_path}`
               : ImageNotFound
           }
-          alt={original_title}
+          alt={original_title || title}
         />
 
         <div className={css.details__info}>
           <h2 className={css.details__title}>
-            {original_title} ({release_date})
+            {original_title || title} ({release_date})
           </h2>
           <p className={css.details__text}>User Score: {vote_average}</p>
           <h3 className={css.details__chapter}>Overview</h3>
@@ -64,7 +65,8 @@ const MovieDetails = ({ movie }) => {
 
 MovieDetails.propTypes = {
   movie: PropTypes.shape({
-    original_title: PropTypes.string.isRequired,
+    original_title: PropTypes.string,
+    title: PropTypes.string,
     release_date: PropTypes.string.isRequired,
     vote_average: PropTypes.number.isRequired,
     overview: PropTypes.string.isRequired,

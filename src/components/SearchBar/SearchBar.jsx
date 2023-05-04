@@ -1,25 +1,29 @@
-import { useRef } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import css from './SearchBar.module.css';
 
-const SearchBar = ({ query, handleSubmit }) => {
-  const search = useRef();
+const SearchBar = ({ handleSubmit }) => {
+  const [search, setSearch] = useState('');
+
+  const handleInputChange = e => {
+    setSearch(e.target.value);
+  };
 
   const handleSubmitForm = e => {
     e.preventDefault();
-    handleSubmit(search.current.value);
+    handleSubmit(search);
   };
 
   return (
     <form className={css.form} onSubmit={handleSubmitForm}>
       <input
-        ref={search}
-        defaultValue={query}
+        value={search}
         className={css.input}
         type="text"
         autoComplete="off"
         autoFocus
         placeholder="Search movies"
+        onChange={handleInputChange}
       />
 
       <button type="submit" className={css.button}>
@@ -30,7 +34,6 @@ const SearchBar = ({ query, handleSubmit }) => {
 };
 
 SearchBar.propTypes = {
-  query: PropTypes.string,
   handleSubmit: PropTypes.func.isRequired,
 };
 

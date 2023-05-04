@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { searchMovie } from 'services/movie-api';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MoviesList from 'components/MoviesList';
@@ -8,13 +8,11 @@ import Loader from 'components/Loader';
 import SearchBar from 'components/SearchBar';
 
 const Movies = () => {
-  const [isLoading, setIsloading] = useState(false);
   const [error, setError] = useState('');
   const [movies, setMovies] = useState([]);
-
+  const [isLoading, setIsloading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const movieName = searchParams.get('query');
-  const location = useLocation();
 
   useEffect(() => {
     if (movieName === null) {
@@ -24,7 +22,7 @@ const Movies = () => {
   }, [movieName]);
 
   const getMovies = async searchQuery => {
-    setMovies([]);
+    // setMovies([]);
     setIsloading(true);
     try {
       const result = await searchMovie(searchQuery);
@@ -57,9 +55,9 @@ const Movies = () => {
 
   return (
     <>
-      <SearchBar query={movieName} handleSubmit={handleSubmit} />
+      <SearchBar handleSubmit={handleSubmit} />
       {isLoading && <Loader />}
-      {movies && <MoviesList movies={movies} location={location} />}
+      {movies.length > 0 && <MoviesList movies={movies} />}
       <ToastContainer autoClose={3000} />
       {error && <p>Oops! Something went wrong! Please try again later</p>}
     </>

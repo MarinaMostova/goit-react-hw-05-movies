@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import css from './ButtonBack.module.css';
+import PropTypes from 'prop-types';
 
 const ButtonBack = ({ location }) => {
   return (
@@ -7,6 +8,10 @@ const ButtonBack = ({ location }) => {
       Go back
     </Link>
   );
+};
+
+ButtonBack.propTypes = {
+  location: PropTypes.object.isRequired,
 };
 
 export default ButtonBack;

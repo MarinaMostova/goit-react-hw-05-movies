@@ -3,20 +3,25 @@ import { useLocation, useParams } from 'react-router-dom';
 import { getMovieDetails } from 'services/movie-api';
 import MovieDetails from 'components/MovieDetails';
 import ButtonBack from 'components/ButtonBack';
+import Loader from 'components/Loader';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState({});
+  const [movie, setMovie] = useState(null);
   const [error, setError] = useState('');
+  const [isLoading, setIsloading] = useState(false);
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? '/');
 
   const getMovie = async id => {
+    setIsloading(true);
     try {
-      const data = await getMovieDetails(id);
-      setMovie(data);
+      const result = await getMovieDetails(id);
+      setMovie(result);
     } catch (error) {
       setError(error);
+    } finally {
+      setIsloading(false);
     }
   };
 
@@ -27,7 +32,8 @@ const MovieDetailsPage = () => {
   return (
     <>
       <ButtonBack location={backLinkHref.current} />
-      <MovieDetails movie={movie} />
+      {isLoading && <Loader />}
+      {movie && <MovieDetails movie={movie} />}
       {error && <p>Oops! Something went wrong! Please try again later</p>}
     </>
   );
