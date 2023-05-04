@@ -7,7 +7,7 @@ import MoviesList from 'components/MoviesList';
 import Loader from 'components/Loader';
 import SearchBar from 'components/SearchBar';
 
-const Movies = () => {
+const MoviesPage = () => {
   const [error, setError] = useState('');
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsloading] = useState(false);
@@ -64,4 +64,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default MoviesPage;
