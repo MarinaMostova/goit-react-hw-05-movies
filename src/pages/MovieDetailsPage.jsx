@@ -13,6 +13,10 @@ const MovieDetailsPage = () => {
   const location = useLocation();
   const backLinkHref = useRef(location.state?.from ?? '/');
 
+  useEffect(() => {
+    getMovie(movieId);
+  }, [movieId]);
+
   const getMovie = async id => {
     setIsloading(true);
     try {
@@ -24,10 +28,6 @@ const MovieDetailsPage = () => {
       setIsloading(false);
     }
   };
-
-  useEffect(() => {
-    getMovie(movieId);
-  }, [movieId]);
 
   return (
     <>

@@ -11,6 +11,10 @@ const Reviews = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsloading] = useState(false);
 
+    useEffect(() => {
+      getRewies(movieId);
+    }, [movieId]);
+
   const getRewies = async id => {
     setIsloading(true);
     try {
@@ -23,9 +27,6 @@ const Reviews = () => {
     }
   };
 
-  useEffect(() => {
-    getRewies(movieId);
-  }, [movieId]);
 
   return (
     <>

@@ -12,6 +12,10 @@ const Cast = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsloading] = useState(false);
 
+  useEffect(() => {
+    getCast(movieId);
+  }, [movieId]);
+
   const getCast = async id => {
     setIsloading(true);
     try {
@@ -23,10 +27,6 @@ const Cast = () => {
       setIsloading(false);
     }
   };
-
-  useEffect(() => {
-    getCast(movieId);
-  }, [movieId]);
 
   return (
     <>
