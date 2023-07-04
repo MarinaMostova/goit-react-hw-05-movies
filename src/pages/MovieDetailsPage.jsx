@@ -34,7 +34,7 @@ const MovieDetailsPage = () => {
       <ButtonBack location={backLinkHref.current} />
       {isLoading && <Loader />}
       {movie && <MovieDetails movie={movie} />}
-      {error && <p>Oops! Something went wrong! Please try again later</p>}
+      {error && <p> Oops! Something went wrong! Please try again later</p>}
     </>
   );
 };
